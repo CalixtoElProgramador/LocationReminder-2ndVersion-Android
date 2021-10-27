@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="reminder"
+            type="com.example.android.locationreminder.data.model.Reminder" />
+
+        <variable
+            name="clickListener"
+            type="com.example.android.locationreminder.ui.reminder.list.adapter.OnClickListener" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:onClick="@{() -> clickListener.onClick(reminder)}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/reminderTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_8sdp"
+                android:singleLine="true"
+                android:text="@{reminder.titleForList}"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                app:layout_constraintEnd_toStartOf="@id/reminderLocation"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="TITLE 1" />
+
+            <TextView
+                android:id="@+id/reminderDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:maxLines="3"
+                android:text="@{reminder.descriptionForList}"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:alpha="0.6"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/reminderLocation"
+                app:layout_constraintStart_toStartOf="@id/reminderTitle"
+                app:layout_constraintTop_toBottomOf="@id/reminderTitle"
+                tools:text="DESCRIPTION 1" />
+
+            <TextView
+                android:id="@+id/reminderLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:text="@{reminder.locationForList}"
+                android:textAppearance="?attr/textAppearanceOverline"
+                app:layout_constraintBottom_toBottomOf="@id/reminderDescription"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/reminderTitle"
+                tools:text="Coordinates: 27.8, -84.14" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

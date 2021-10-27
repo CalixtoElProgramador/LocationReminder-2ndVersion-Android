@@ -2,4 +2,35 @@
     <string name="app_name">LocationReminder</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="auth_welcome_message">Welcome to the location reminder app</string>
+    <string name="login">Login</string>
+    <string name="reminders_fragment_title">Reminders</string>
+    <string name="fab_reminders_description">Button to add a new reminder</string>
+    <string name="logout">Logout</string>
+    <string name="logout_description">Log out</string>
+    <string name="add_reminder_fragment_title">Add Reminder</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="fab_add_reminder_description">Save the location reminder</string>
+    <string name="location">Location</string>
+    <string name="image_map_description">Search in the map</string>
+    <string name="successfully_saved">Successfully saved!</string>
+    <string name="error_inputs_empty">Fill in all fields</string>
+    <string name="message_list_reminders_empty">It looks like it\'s empty. Add yout first reminder by pressing the top left button</string>
+    <string name="image_list_reminders_empty_description">Your list reminders are empty</string>
+    <string name="details_reminder_fragment_title">Details</string>
+    <string name="delete_description">Delete the current reminder</string>
+    <string name="delete">Delete</string>
+    <string name="message_reminder_delete">Reminder delete successfully!</string>
+    <string name="normal_map">Normal Map</string>
+    <string name="hybrid_map">Hybrid Map</string>
+    <string name="satellite_map">Satellite Map</string>
+    <string name="terrain_map">Terrain Map</string>
+    <string name="lat_long_snippet">Lat: %1$.5f, Long: %2$.5f</string>
+    <string name="dropped_pin">Dropped Pin</string>
+    <string name="poi">poi</string>
+    <string name="maps_fragment_title">Google Maps</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="search_in_the_map">Click here to search Google Maps</string>
 </resources>
