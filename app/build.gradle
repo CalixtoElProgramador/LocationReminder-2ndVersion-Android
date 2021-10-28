@@ -57,8 +57,9 @@ dependencies {
     kapt "androidx.databinding:databinding-common:7.0.3"
     kapt "com.android.databinding:compiler:3.2.0-alpha10"
 
-    // Google Maps
+    // Google Maps && Geofence
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
 
     // Navigation Components
     implementation "androidx.fragment:fragment-ktx:1.4.0-alpha10"

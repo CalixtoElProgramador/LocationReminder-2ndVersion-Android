@@ -8,5 +8,6 @@ interface ReminderRepo {
     fun getReminders(): LiveData<List<Reminder>>
     suspend fun insertReminder(reminder: Reminder)
     suspend fun deleteReminderById(reminderId: String)
+    suspend fun getReminderById(id: String): Reminder
 
 }

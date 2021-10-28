@@ -23,4 +23,6 @@ class ReminderRepoImpl @Inject constructor(
     override suspend fun deleteReminderById(reminderId: String) = withContext(ioDispatcher) {
         localDataSource.deleteReminderById(reminderId)
     }
+
+    override suspend fun getReminderById(id: String): Reminder = localDataSource.getReminderById(id)
 }

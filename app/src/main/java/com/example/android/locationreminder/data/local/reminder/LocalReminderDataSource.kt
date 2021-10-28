@@ -10,4 +10,7 @@ interface LocalReminderDataSource {
     suspend fun insertReminder(reminder: Reminder)
 
     suspend fun deleteReminderById(reminderId: String)
+
+    suspend fun getReminderById(id: String): Reminder
+
 }

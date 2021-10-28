@@ -3,6 +3,8 @@ package com.example.android.locationreminder.presentation.reminder
 import androidx.lifecycle.*
 import com.example.android.locationreminder.data.model.Reminder
 import com.example.android.locationreminder.domain.reminder.ReminderRepo
+import com.example.android.locationreminder.utils.createTitle
+import com.google.android.gms.maps.model.PointOfInterest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,8 +26,11 @@ class ReminderViewModel @Inject constructor(private val repo: ReminderRepo) : Vi
 
     val title = MutableLiveData<String>()
     val description = MutableLiveData<String>()
+    val location = MutableLiveData<String>()
     val latitude = MutableLiveData<String>()
     val longitude = MutableLiveData<String>()
+
+    val selectedPOI = MutableLiveData<PointOfInterest?>()
 
     private val _eventShowSnackbar = MutableLiveData<Boolean>()
     val eventShowSnackbar: LiveData<Boolean>
@@ -42,6 +47,7 @@ class ReminderViewModel @Inject constructor(private val repo: ReminderRepo) : Vi
     val reminders = repo.getReminders()
 
     val empty: LiveData<Boolean> = Transformations.map(reminders) { it.isEmpty() }
+    val isPoiSelected: LiveData<Boolean> = Transformations.map(selectedPOI) { it == null }
 
     private val _reminderClicked = MutableLiveData<Reminder?>()
     val reminderClicked: LiveData<Reminder?>
@@ -51,6 +57,10 @@ class ReminderViewModel @Inject constructor(private val repo: ReminderRepo) : Vi
     val navigateToDetails: LiveData<String?>
         get() = _navigateToDetails
 
+    private val _eventInputsAreCorrect = MutableLiveData<Boolean>()
+    val eventInputsAreCorrect: LiveData<Boolean>
+        get() = _eventInputsAreCorrect
+
     init {
         _navigateToAddReminder.value = false
         _navigateToAuth.value = false
@@ -58,6 +68,20 @@ class ReminderViewModel @Inject constructor(private val repo: ReminderRepo) : Vi
         _eventShowSnackbar.value = false
         _eventReminderApproved.value = false
         _navigateToMap.value = false
+        _eventInputsAreCorrect.value = false
+        selectedPOI.value = null
+    }
+
+    fun verifyAgainInputs() {
+        _eventInputsAreCorrect.value = false
+    }
+
+    fun onSavePoiSelected() {
+        selectedPOI.value?.let { pointOfInterest ->
+            latitude.value = pointOfInterest.latLng.latitude.toString()
+            longitude.value = pointOfInterest.latLng.longitude.toString()
+            _navigateToBack.value = true
+        }
     }
 
     fun deleteReminder() = viewModelScope.launch {
@@ -104,18 +128,22 @@ class ReminderViewModel @Inject constructor(private val repo: ReminderRepo) : Vi
     fun onSaveReminderClick() {
         val title = title.value
         val description = description.value
+        location.value = selectedPOI.value?.name.toString()
         val latitude = latitude.value
         val longitude = longitude.value
+
         when {
-            !title.isNullOrEmpty() && !description.isNullOrEmpty() && !latitude.isNullOrEmpty() && !longitude.isNullOrEmpty() ->
-                createReminder(Reminder(title, description, "Coordinates: $latitude, $longitude"))
-            else -> _eventShowSnackbar.value = true
+            !title.isNullOrEmpty() && !description.isNullOrEmpty() && !latitude.isNullOrEmpty()
+                    && !longitude.isNullOrEmpty() -> { _eventInputsAreCorrect.value = true }
+            else -> { _eventShowSnackbar.value = true; verifyAgainInputs() }
         }
     }
 
-    private fun createReminder(reminder: Reminder) = viewModelScope.launch {
+    fun createReminder(reminder: Reminder) = viewModelScope.launch {
         repo.insertReminder(reminder)
         _eventReminderApproved.value = true
+        selectedPOI.value = null
+        verifyAgainInputs()
     }
 
     fun onBackArrowClick() {

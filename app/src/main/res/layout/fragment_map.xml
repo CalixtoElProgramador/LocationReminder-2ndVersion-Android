@@ -5,6 +5,12 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="reminderViewModel"
+            type="com.example.android.locationreminder.presentation.reminder.ReminderViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,6 +42,18 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/topAppBar_map" />
+
+        <Button
+            android:id="@+id/button_saveLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save"
+            android:layout_marginBottom="@dimen/_16sdp"
+            android:onClick="@{() -> reminderViewModel.onSavePoiSelected()}"
+            android:visibility="@{reminderViewModel.isPoiSelected ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

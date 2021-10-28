@@ -24,6 +24,14 @@ interface ReminderDao {
     fun getReminders(): LiveData<List<Reminder>>
 
     /**
+     * @param reminderId the id of the reminder
+     * @return the reminder object with the reminderId
+     */
+    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
+    @Query("SELECT * FROM reminders where entryid = :reminderId")
+    suspend fun getReminderById(reminderId: String): Reminder
+
+    /**
      * Delete a task by id.
      *
      * @return the number of tasks deleted. This should always be 1.

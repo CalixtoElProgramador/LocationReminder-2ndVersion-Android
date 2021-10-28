@@ -6,6 +6,8 @@ import com.example.android.locationreminder.BaseApplication
 import com.example.android.locationreminder.app.IoDispatcher
 import com.example.android.locationreminder.app.MainDispatcher
 import com.example.android.locationreminder.data.local.AppDatabase
+import com.example.android.locationreminder.data.local.reminder.LocalReminderDataSourceImpl
+import com.example.android.locationreminder.data.local.reminder.ReminderDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,7 +28,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideApodDao(db: AppDatabase) = db.reminderDao
+    fun provideReminderDao(db: AppDatabase) = db.reminderDao
 
     @Singleton
     @Provides

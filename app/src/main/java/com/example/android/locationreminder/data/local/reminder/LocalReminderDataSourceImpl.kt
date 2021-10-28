@@ -23,5 +23,5 @@ class LocalReminderDataSourceImpl @Inject constructor(
         reminderDao.deleteReminderById(reminderId)
     }
 
-
+    override suspend fun getReminderById(id: String): Reminder = reminderDao.getReminderById(id)
 }

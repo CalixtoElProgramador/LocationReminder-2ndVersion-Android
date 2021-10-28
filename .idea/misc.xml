@@ -4,8 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/calix/Documents/-/Cursos/Udacity/Nanodegree/Unidad04/Proyecto/LocationReminder/app/src/main/res/drawable/ic_exit_to_app.xml" value="0.2351851851851852" />
+        <entry key="..\:/Users/calix/Documents/-/Cursos/Udacity/Nanodegree/Unidad04/Proyecto/LocationReminder/app/src/main/res/layout/activity_details.xml" value="0.2234375" />
         <entry key="..\:/Users/calix/Documents/-/Cursos/Udacity/Nanodegree/Unidad04/Proyecto/LocationReminder/app/src/main/res/layout/activity_main.xml" value="0.209375" />
-        <entry key="..\:/Users/calix/Documents/-/Cursos/Udacity/Nanodegree/Unidad04/Proyecto/LocationReminder/app/src/main/res/layout/fragment_add_reminder.xml" value="0.33" />
+        <entry key="..\:/Users/calix/Documents/-/Cursos/Udacity/Nanodegree/Unidad04/Proyecto/LocationReminder/app/src/main/res/layout/fragment_add_reminder.xml" value="0.2234375" />
         <entry key="..\:/Users/calix/Documents/-/Cursos/Udacity/Nanodegree/Unidad04/Proyecto/LocationReminder/app/src/main/res/layout/fragment_auth.xml" value="0.2234375" />
         <entry key="..\:/Users/calix/Documents/-/Cursos/Udacity/Nanodegree/Unidad04/Proyecto/LocationReminder/app/src/main/res/layout/fragment_details_reminder.xml" value="0.2234375" />
         <entry key="..\:/Users/calix/Documents/-/Cursos/Udacity/Nanodegree/Unidad04/Proyecto/LocationReminder/app/src/main/res/layout/fragment_list_reminders.xml" value="0.2234375" />
