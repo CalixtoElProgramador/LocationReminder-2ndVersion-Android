@@ -10,12 +10,15 @@ import com.example.android.locationreminder.databinding.FragmentListRemindersBin
 import com.example.android.locationreminder.presentation.reminder.ReminderViewModel
 import com.example.android.locationreminder.ui.reminder.list.adapter.OnClickListener
 import com.example.android.locationreminder.ui.reminder.list.adapter.RemindersAdapter
+import com.firebase.ui.auth.AuthUI
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ListRemindersFragment : Fragment(R.layout.fragment_list_reminders) {
 
     private val viewModel by activityViewModels<ReminderViewModel>()
+    private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
 
     private lateinit var binding: FragmentListRemindersBinding
 
@@ -54,6 +57,7 @@ class ListRemindersFragment : Fragment(R.layout.fragment_list_reminders) {
 
         viewModel.navigateToAuth.observe(viewLifecycleOwner, {
             if (it) {
+                AuthUI.getInstance().signOut(requireContext()).also { firebaseAuth.signOut() }
                 findNavController().navigate(ListRemindersFragmentDirections.toAuthFragment())
                 viewModel.onAuthNavigated()
             }
