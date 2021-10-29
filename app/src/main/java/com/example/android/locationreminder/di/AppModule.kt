@@ -6,8 +6,12 @@ import com.example.android.locationreminder.BaseApplication
 import com.example.android.locationreminder.app.IoDispatcher
 import com.example.android.locationreminder.app.MainDispatcher
 import com.example.android.locationreminder.data.local.AppDatabase
+import com.example.android.locationreminder.data.local.reminder.LocalReminderDataSource
 import com.example.android.locationreminder.data.local.reminder.LocalReminderDataSourceImpl
 import com.example.android.locationreminder.data.local.reminder.ReminderDao
+import com.example.android.locationreminder.domain.reminder.ReminderRepo
+import com.example.android.locationreminder.domain.reminder.ReminderRepoImpl
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,6 +29,14 @@ object AppModule {
     @Provides
     fun provideRoomInstance(@ApplicationContext context: Context) =
         Room.databaseBuilder(context, AppDatabase::class.java, "app_database").build()
+
+    @Singleton
+    @Provides
+    fun provideReminderDataSource(
+        reminderDao: ReminderDao,
+        @IoDispatcher ioDispatcher: CoroutineDispatcher
+    ): LocalReminderDataSource = LocalReminderDataSourceImpl(reminderDao, ioDispatcher)
+
 
     @Singleton
     @Provides

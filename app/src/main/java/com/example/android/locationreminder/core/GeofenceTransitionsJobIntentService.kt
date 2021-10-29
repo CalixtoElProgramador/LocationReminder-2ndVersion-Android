@@ -5,7 +5,7 @@ import android.content.Intent
 import android.util.Log
 import androidx.core.app.JobIntentService
 import com.example.android.locationreminder.R
-import com.example.android.locationreminder.data.local.reminder.ReminderDao
+import com.example.android.locationreminder.data.local.reminder.LocalReminderDataSource
 import com.example.android.locationreminder.data.model.Reminder
 import com.example.android.locationreminder.utils.sendNotification
 import com.google.android.gms.location.Geofence
@@ -19,7 +19,7 @@ import kotlin.coroutines.CoroutineContext
 class GeofenceTransitionsJobIntentService: JobIntentService(), CoroutineScope {
 
     @Inject
-    lateinit var repo: ReminderDao
+    lateinit var localDataSource: LocalReminderDataSource
 
     private var coroutineJob: Job = Job()
     override val coroutineContext: CoroutineContext
@@ -60,7 +60,7 @@ class GeofenceTransitionsJobIntentService: JobIntentService(), CoroutineScope {
         for (geofence in triggeringGeofences) {
             val requestId = geofence.requestId
             CoroutineScope(coroutineContext).launch(SupervisorJob()) {
-                val result = repo.getReminderById(requestId)
+                val result = localDataSource.getReminderById(requestId)
                 sendNotification(
                     this@GeofenceTransitionsJobIntentService, Reminder(
                         result.title,
